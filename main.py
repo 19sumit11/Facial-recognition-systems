@@ -2,6 +2,7 @@ import face_recognition
 import cv2
 import numpy as np
 import csv
+import os
 from datetime import datetime
 
 video_capture = cv2.VideoCapture(0)
@@ -14,8 +15,11 @@ sumit_encoding = face_recognition.face_encodings(sumit_image)[0]
 Nikhil_image = face_recognition.load_image_file("images/Nikhil.png")
 Nikhil_encoding = face_recognition.face_encodings(Nikhil_image)[0]
 
-known_face_encodings = [sumit_encoding, Nikhil_encoding]
-known_face_names = ["Sumit", "Nikhil"]
+Hitanshu_image = face_recognition.load_image_file("images/hitanshu.jpg")
+Hitanshu_encoding = face_recognition.face_encodings(Hitanshu_image)[0]
+
+known_face_encodings = [sumit_encoding, Nikhil_encoding,Hitanshu_encoding]
+known_face_names = ["Sumit", "Nikhil","Hitanshu"]
 
 # list of excepted students
 students = known_face_names.copy()
@@ -29,7 +33,7 @@ s=True
 now = datetime.now()
 current_date = now.strftime("%Y-%m-%d")
 
-f = open(f"{current_date}.csv", "w+", newline="")
+f = open( current_date+".csv", "w+", newline="")
 lnwriter = csv.writer(f)
 
 while True:
@@ -65,14 +69,17 @@ while True:
 
             if name in students:
                 students.remove(name)
-                current_time = now.strftime("%H-%M%S")
-                lnwriter.writerow([name, current_time])
+                print(students)
+                current_time = now.strftime("%H-%M-%S")
+                lnwriter.writerow([name,current_time])
 
     cv2.imshow("Attendance", frame)
     if cv2.waitKey(1) & 0xFF == ord("q"):
         break
 
-video_capture.relase()
+video_capture.release()
+f.flush()
 cv2.destroyAllWindows()
+
 f.close()
 
