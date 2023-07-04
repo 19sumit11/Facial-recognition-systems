@@ -18,10 +18,13 @@ Nikhil_encoding = face_recognition.face_encodings(Nikhil_image)[0]
 Hitanshu_image = face_recognition.load_image_file("images/hitanshu.jpg")
 Hitanshu_encoding = face_recognition.face_encodings(Hitanshu_image)[0]
 
-known_face_encodings = [sumit_encoding, Nikhil_encoding,Hitanshu_encoding]
-known_face_names = ["Sumit", "Nikhil","Hitanshu"]
+Abhishek_image = face_recognition.load_image_file("images/Abhishek.jpg")
+Abhishek_encoding = face_recognition.face_encodings(Abhishek_image)[0]
 
-# list of excepted students
+known_face_encodings = [sumit_encoding, Nikhil_encoding,Hitanshu_encoding,Abhishek_encoding]
+known_face_names = ["Sumit", "Nikhil","Hitanshu","Abhishek"]
+
+# list of excepted students   
 students = known_face_names.copy()
 
 face_locations = []
